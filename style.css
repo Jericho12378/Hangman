@@ -32,9 +32,11 @@
     width: 100%;
 }
 .dash{
+    text-align: center;
+    font-size: 32px;
     border-bottom: 2px solid grey;
-    width: 12px;
-    margin:0 18px;
+    width: 18px;
+    margin:0 4px;
     margin-top: 42px;
 }
 .word__wrapper{
@@ -54,4 +56,12 @@ input{
     margin-right: 12px;
     font-size: 18px;
     text-align: center;
+}
+.letter{
+    text-align: center;
+    font-size: 32px;
+    border-bottom: 2px solid grey;
+    width: 18px;
+    margin:0 4px;
+    margin-top: 42px;
 }
