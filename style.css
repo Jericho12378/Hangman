@@ -23,8 +23,10 @@
 .hangman__wrapper{
     width: 50%;
     height: 100%;
+   
 }
 .image__wrapper{
+    width: 480px;
    border: 2px solid grey;
    margin: 4px;
 }

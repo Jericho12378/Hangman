@@ -1,44 +1,51 @@
-const word = document.querySelector(".word__wrapper")
-let letters = {}
-async function getWords(){
-    let x = Math.floor(Math.random() * 5);
-    const words = await fetch(`https://random-word-api.herokuapp.com/word`)
-    const wordsData = await words.json();
+const word = document.querySelector(".word__wrapper");
+const image = document.querySelector(".image__wrapper")
+let letters = {};
+let correctGuesses = []
+let imageState = 1;
+async function getWords() {
+  const words = await fetch(`https://random-word-api.herokuapp.com/word`);
+  const wordsData = await words.json();
 
-    let hangmanWord = wordsData[0]
+  let hangmanWord = wordsData[0];
+  image.innerHTML = changeImage(1)
+  console.log(hangmanWord);
+  letters = hangmanWord.split("");
+  console.log(letters);
+  correctGuesses = new Array(letters.length).fill("")
+  word.innerHTML = letters.map(() => postDash()).join("");
+}
+
+getWords();
+
+function postDash() {
+  return ` <div class="dash"></div>`;
+}
+function postLetter(letter) {
+  return `<div class="letter">${letter} </div>`;
+}
+function showUserGuess(){
+  word.innerHTML = correctGuesses.map((element) => postLetter(element)).join("")
+}
+function buttonClicked() {
+  let userGuess = document.getElementById("userInput").value;
+  let x;
   
-    console.log(hangmanWord)
-    letters = hangmanWord.split('')
-    console.log(letters)
-    
-   // word.innerHTML = letters
-    
-        word.innerHTML = letters.map((element) => postDash(element)).join("")
-      
-}
-
-getWords()
-
-function postDash(){
-    return ` <div class="dash"></div>`
-}   
-function postLetter(letter){
-    return`<div class="letter">${letter} </div>`
-}
-
-function buttonClicked(){
-    let userGuess = document.getElementById("userInput").value;
-    console.log(userGuess)
-    if(letters.includes(userGuess)){
-        const indexes = []
-        for (let index = 0; index < letters.length; index++) {
-            if (letters[index] === userGuess) {
-              indexes.push(index);
-            }
-          }
-          console.log(indexes)
-    }else{
-        console.log(false)
+  console.log(userGuess);
+  if (letters.includes(userGuess)) {
+  
+    for (x = 0; x < letters.length; x++) {
+      if (letters[x] == userGuess) {
+        correctGuesses[x] = userGuess
+      }
     }
-    
+  } else {
+    imageState++
+    image.innerHTML = changeImage(imageState)
+  }
+  //console.log(correctGuesses)
+  showUserGuess()
+}
+function changeImage(state){
+  return ` <img src="./states/${state}.PNG" class="hangman__image" alt="">`
 }
