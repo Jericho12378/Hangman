@@ -7,10 +7,11 @@ let imageState = 1;
 let life = 4
 let hangmanWord
 async function getWords() {
-  const words = await fetch(`https://random-word-api.herokuapp.com/word`);
+  const words = await fetch(`https://api.api-ninjas.com/v1/randomword`);
   const wordsData = await words.json();
 
-  hangmanWord = wordsData[0];
+  hangmanWord = wordsData.word;
+  hangmanWord.toLowerCase()
   image.innerHTML = changeImage(1);
   livesLeft.innerHTML = decreaseLife(life);
   console.log(hangmanWord);
@@ -25,6 +26,7 @@ getWords();
 
 function buttonClicked() {
   let userGuess = document.getElementById("userInput").value;
+  userGuess.toLowerCase()
   let x;
   
   console.log(userGuess);
@@ -43,7 +45,7 @@ function buttonClicked() {
     life--;
     image.innerHTML = changeImage(imageState)
     if(life == 0){
-      image.innerHTML = gameOver()
+      setTimeout(() => {image.innerHTML = gameOver()}, 2500) 
     }
    
     livesLeft.innerHTML = decreaseLife(life) 
