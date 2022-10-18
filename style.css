@@ -93,7 +93,7 @@ input{
     .image__wrapper{
         width: 300px;
         margin-top: 64px;
-        box-shadow: 0 12px 30px 0 rgb(0,0,0,0.28);
+        box-shadow: 0 12px 30px 0 rgb(63, 7, 216);
     }
     .livesLeft{
         position: absolute;
