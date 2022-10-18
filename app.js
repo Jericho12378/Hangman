@@ -6,35 +6,34 @@ let correctGuesses = []
 let imageState = 1;
 let life = 4
 let hangmanWord
-async function getWords() {
-  const words = await fetch(`https://api.api-ninjas.com/v1/randomword`);
+async function start() {
+  const words = await fetch(`https://random-words-api.vercel.app/word/verb`);
   const wordsData = await words.json();
-
-  hangmanWord = wordsData.word;
-  hangmanWord.toLowerCase()
+  hangmanWord = wordsData[0].word;
+  let forceLowerCase_word =hangmanWord.toString().toLowerCase()
   image.innerHTML = changeImage(1);
   livesLeft.innerHTML = decreaseLife(life);
-  console.log(hangmanWord);
-  letters = hangmanWord.split("");
+  console.log( forceLowerCase_word);
+  letters =  forceLowerCase_word.split("");
   console.log(letters);
   correctGuesses = new Array(letters.length).fill("")
   word.innerHTML = letters.map(() => postDash()).join("");
 }
 
-getWords();
+start();
 
 
 function buttonClicked() {
   let userGuess = document.getElementById("userInput").value;
-  userGuess.toLowerCase()
+  let forceLowerCase = userGuess.toString().toLowerCase()
   let x;
   
-  console.log(userGuess);
-  if (letters.includes(userGuess)) {
+  console.log(forceLowerCase);
+  if (letters.includes(forceLowerCase)) {
   
     for (x = 0; x < letters.length; x++) {
-      if (letters[x] == userGuess) {
-        correctGuesses[x] = userGuess
+      if (letters[x] == forceLowerCase) {
+        correctGuesses[x] = forceLowerCase
       }
     }
     if(JSON.stringify(letters) == JSON.stringify(correctGuesses)){
@@ -44,6 +43,10 @@ function buttonClicked() {
     imageState++
     life--;
     image.innerHTML = changeImage(imageState)
+    if(life == 1){
+      setTimeout(() => { alert("Why are you so DUMB! I'm about to die")}, 1200)
+     
+    }
     if(life == 0){
       setTimeout(() => {image.innerHTML = gameOver()}, 2500) 
     }
