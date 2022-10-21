@@ -8,7 +8,6 @@ body{
     background-color: rgb(220, 230, 226);
 }
 .container{
-    position: relative;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -16,7 +15,6 @@ body{
    
 }
 .row{
-    
     width: 1000px;
     max-width: 1200px;
     height: 680px;
@@ -39,7 +37,7 @@ body{
     font-weight: bold;
 }
 .hangman__wrapper{
-    
+    position: relative;
     width: 50%;
     height: 100%;
     
@@ -91,27 +89,38 @@ input{
     text-align: center;
 }
 .modal{
-    position: absolute;
-    top: 200px;
-    background-color: rgba(128, 128, 128, 0.822);
-    left: 0;
-    right: 0;
+    
     height: 20%;
-    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.modal__wrapper{
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    left: 0;
+    right: 0;
+}
+.overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(7, 6, 6, 0.89);
+}
 
 .playAgain{
-    background-color: rgb(99, 93, 93);
-    color: white;
+    background-color: white;
+    color: black;
     font-size: 16px;
     padding: 10px 84px;
     border-radius: 12px;
     transition: all 300ms ease;
 }
 .playAgain:hover{
+    color: white;
     background-color: purple;
 }
 @media(max-width: 480px){

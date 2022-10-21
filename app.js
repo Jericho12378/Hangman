@@ -1,7 +1,8 @@
 const word = document.querySelector(".word__wrapper");
 const image = document.querySelector(".image__wrapper");
-const livesLeft = document.querySelector(".livesLeft")
-const container = document.querySelector(".container")
+const livesLeft = document.querySelector(".livesLeft");
+const modal__wrapper = document.querySelector(".modal__wrapper");
+const overlay = document.querySelector(".answer__wrapper");
 let letters = [];
 let correctGuesses = []
 let imageState = 1;
@@ -39,7 +40,7 @@ function buttonClicked() {
     }
     if(JSON.stringify(letters) == JSON.stringify(correctGuesses)){
       image.innerHTML = wordComplete();
-      setTimeout(() => {container.innerHTML = showModal()}, 2500) 
+      setTimeout(() => {modal__wrapper.innerHTML = showModal()}, 2500) 
     }
   } else {
     imageState++
@@ -50,9 +51,17 @@ function buttonClicked() {
       
     }
     if(life == 0){
-      setTimeout(() => {image.innerHTML = gameOver()}, 2500) 
-      setTimeout(() => {container.innerHTML = showModal()}, 2500)
-    
+
+
+      setTimeout(() => {image.innerHTML = gameOver()}, 2000) 
+       //setTimeout(() => {overlay.innerHTML = showOverlay()}, 2500)
+       setTimeout(() => {modal__wrapper.innerHTML = showModal(),
+      document.getElementById("cont").style.backgroundColor = "grey",
+      document.getElementById("userInput").style.backgroundColor = "grey",
+      document.getElementById("butt").style.backgroundColor = "grey",
+      document.getElementById("butt").disabled = "true"
+    }, 3500)
+  
     }
    
     livesLeft.innerHTML = decreaseLife(life) 
@@ -88,7 +97,13 @@ function refresh(){
   return false
 }
 function showModal(){
-  return ` <div class="modal">
-  <button class="playAgain" onclick="refresh()">Play again</button>
-    </div>`
+  return `
+  <div class="modal">
+  <button id="modalID" class="playAgain" onclick="refresh()">Play again</button>
+  </div> `
+}
+function showOverlay(){
+  return ` 
+  <div class="overlay"></div>
+  `
 }
