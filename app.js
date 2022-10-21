@@ -1,6 +1,7 @@
 const word = document.querySelector(".word__wrapper");
 const image = document.querySelector(".image__wrapper");
 const livesLeft = document.querySelector(".livesLeft")
+const container = document.querySelector(".container")
 let letters = [];
 let correctGuesses = []
 let imageState = 1;
@@ -38,6 +39,7 @@ function buttonClicked() {
     }
     if(JSON.stringify(letters) == JSON.stringify(correctGuesses)){
       image.innerHTML = wordComplete();
+      setTimeout(() => {container.innerHTML = showModal()}, 2500) 
     }
   } else {
     imageState++
@@ -45,10 +47,12 @@ function buttonClicked() {
     image.innerHTML = changeImage(imageState)
     if(life == 1){
       setTimeout(() => { alert("Why are you so DUMB! I'm about to die")}, 1200)
-     
+      
     }
     if(life == 0){
       setTimeout(() => {image.innerHTML = gameOver()}, 2500) 
+      setTimeout(() => {container.innerHTML = showModal()}, 2500)
+    
     }
    
     livesLeft.innerHTML = decreaseLife(life) 
@@ -82,4 +86,9 @@ function showUserGuess(){
 function refresh(){
   location.reload();
   return false
+}
+function showModal(){
+  return ` <div class="modal">
+  <button class="playAgain" onclick="refresh()">Play again</button>
+    </div>`
 }
