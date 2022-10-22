@@ -123,6 +123,18 @@ input{
     color: white;
     background-color: purple;
 }
+.playAgain_purple{
+    background-color: purple;
+    color: white;
+    font-size: 16px;
+    padding: 10px 84px;
+    border-radius: 12px;
+    transition: all 300ms ease;
+}
+.playAgain_purple:hover{
+    color: black;
+    background-color: white;
+}
 @media(max-width: 480px){
     .image__wrapper{
         width: 300px;

@@ -39,8 +39,13 @@ function buttonClicked() {
       }
     }
     if(JSON.stringify(letters) == JSON.stringify(correctGuesses)){
-      image.innerHTML = wordComplete();
-      setTimeout(() => {modal__wrapper.innerHTML = showModal()}, 2500) 
+      image.innerHTML = wordComplete(6);
+      setTimeout(() => {modal__wrapper.innerHTML = showModal_purple(),
+        document.getElementById("cont").style.backgroundColor = "grey",
+        document.getElementById("userInput").style.backgroundColor = "grey",
+        document.getElementById("butt").style.backgroundColor = "grey",
+        image.innerHTML = wordComplete(6.1);
+        document.getElementById("butt").disabled = "true"}, 2500) 
     }
   } else {
     imageState++
@@ -51,8 +56,6 @@ function buttonClicked() {
       
     }
     if(life == 0){
-
-
       setTimeout(() => {image.innerHTML = gameOver()}, 2000) 
        //setTimeout(() => {overlay.innerHTML = showOverlay()}, 2500)
        setTimeout(() => {modal__wrapper.innerHTML = showModal(),
@@ -79,10 +82,11 @@ function gameOver(){
   return `<h1 class = "gameOver">Game Over</h1>
   <p class ="hangmanWord">The word is: ${hangmanWord}</p>`
 }
-function wordComplete(){
-  return ` <img src="./states/6.PNG" class="hangman__image" alt="">
+function wordComplete(state){
+  return ` <img src="./states/${state}.PNG" class="hangman__image" id ="state6__image"alt="">
   <h1 class = "complete">CONGRATULATIONS! you made it</h1>`
 }
+
 function postDash() {
   return ` <div class="dash"></div>`;
 }
@@ -100,6 +104,12 @@ function showModal(){
   return `
   <div class="modal">
   <button id="modalID" class="playAgain" onclick="refresh()">Play again</button>
+  </div> `
+}
+function showModal_purple(){
+  return `
+  <div class="modal">
+  <button id="modalID" class="playAgain_purple" onclick="refresh()">Play again</button>
   </div> `
 }
 function showOverlay(){
